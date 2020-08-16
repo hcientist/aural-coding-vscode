@@ -1,31 +1,327 @@
 import player from './player'
 
-export default class AuralCoding {
+// with thanks to David Stringham and to https://noobnotes.net/super-mario-bros-theme-nintendo/
+const song = {
+  "stanzas": [
+    [
+      "E5",
+      "E5",
+      "E5"
+    ],
+    [
+      "C5",
+      "E5",
+      "G5",
+      "G4"
+    ],
+    [
+      "C5",
+      "G4",
+      "E4"
+    ],
+    [
+      "A4",
+      "B4",
+      "B4",
+      "A4"
+    ],
+    [
+      "G4",
+      "E5",
+      "G5",
+      "A5"
+    ],
+    [
+      "F5",
+      "G5",
+      "E5",
+      "C5",
+      "D5",
+      "B4"
+    ],
+    [
+      "C5",
+      "G4",
+      "E4"
+    ],
+    [
+      "A4",
+      "B4",
+      "B4",
+      "A4"
+    ],
+    [
+      "G4",
+      "E5",
+      "G5",
+      "A5"
+    ],
+    [
+      "F5",
+      "G5",
+      "E5",
+      "C5",
+      "D5",
+      "B4"
+    ],
+    [
+      "G5",
+      "Gb5",
+      "F5",
+      "D5",
+      "E5"
+    ],
+    [
+      "G4",
+      "A4",
+      "C5"
+    ],
+    [
+      "A4",
+      "C5",
+      "D5"
+    ],
+    [
+      "G5",
+      "Gb5",
+      "F5",
+      "D5",
+      "E5"
+    ],
+    [
+      "C6",
+      "C6",
+      "C6"
+    ],
+    [
+      "G5",
+      "Gb5",
+      "F5",
+      "D5",
+      "E5"
+    ],
+    [
+      "G4",
+      "A4",
+      "C5"
+    ],
+    [
+      "A4",
+      "C5",
+      "D5"
+    ],
+    [
+      "Eb5",
+      "D5",
+      "C5"
+    ],
+    [
+      "C5",
+      "C5",
+      "C5"
+    ],
+    [
+      "C5",
+      "D5",
+      "E5",
+      "C5",
+      "A4",
+      "G4"
+    ],
+    [
+      "C5",
+      "C5",
+      "C5"
+    ],
+    [
+      "C5",
+      "D5",
+      "E5"
+    ],
+    [
+      "C5",
+      "C5",
+      "C5"
+    ],
+    [
+      "C5",
+      "D5",
+      "E5",
+      "C5",
+      "A4",
+      "G4"
+    ],
+    [
+      "E5",
+      "E5",
+      "E5"
+    ],
+    [
+      "C5",
+      "E5",
+      "G5"
+    ],
+    [
+      "G4"
+    ],
+    [
+      "C5",
+      "G4",
+      "E4"
+    ],
+    [
+      "A4",
+      "B4",
+      "B4",
+      "A4"
+    ],
+    [
+      "G4",
+      "E5",
+      "G5",
+      "A5"
+    ],
+    [
+      "F5",
+      "G5",
+      "E5",
+      "C5",
+      "D5",
+      "B4"
+    ],
+    [
+      "C5",
+      "G4",
+      "E4"
+    ],
+    [
+      "A4",
+      "B4",
+      "Bb4",
+      "A4"
+    ],
+    [
+      "G4",
+      "E5",
+      "G5",
+      "A5"
+    ],
+    [
+      "F5",
+      "G5",
+      "E5",
+      "C5",
+      "D5",
+      "B4"
+    ],
+    [
+      "E5",
+      "C5",
+      "G4"
+    ],
+    [
+      "G4",
+      "A4",
+      "F5",
+      "F5",
+      "A4"
+    ],
+    [
+      "B4",
+      "A5",
+      "A5",
+      "A5",
+      "G5",
+      "F5"
+    ],
+    [
+      "E5",
+      "C5",
+      "A4",
+      "G4"
+    ],
+    [
+      "E5",
+      "C5",
+      "G4"
+    ],
+    [
+      "G4",
+      "A4",
+      "F5",
+      "F5",
+      "A4"
+    ],
+    [
+      "B4",
+      "F5",
+      "F5",
+      "F5",
+      "E5",
+      "D5",
+      "C4"
+    ],
+    [
+      "G4",
+      "E4",
+      "C4"
+    ],
+    [
+      "C5",
+      "G4",
+      "E4"
+    ],
+    [
+      "A4",
+      "B4",
+      "A4"
+    ],
+    [
+      "G4",
+      "B4",
+      "G4"
+    ],
+    [
+      "G4",
+      "F4",
+      "G4"
+    ]
+  ]
+}
 
-  constructor() {
-    let noteName;
-    this.firstKey = 0x15;
-    this.lastKey = 0x6C;
-    this.noteNames = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+
+console.log(song)
+export default class AuralCoding {
+  constructor () {
+    this.notes = song.stanzas.reduce(
+      (accumulator, currentValue) => accumulator.concat(currentValue),
+      []
+    )
+    console.log("notes", this.notes)
+    this.trackIdx = 0
+    let noteName
+    this.firstKey = 0x15
+    this.lastKey = 0x6C
+    this.noteNames = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
     this.player = player
-    this.keys = {};
-    this.drums = {};
-    this.sources = {};
-    this.keyForNoteName = {};
-    this.noteForKey = {};
-    this.allNoteNames = [];
+    this.keys = {}
+    this.drums = {}
+    this.sources = {}
+    this.keyForNoteName = {}
+    this.noteForKey = {}
+    this.allNoteNames = []
 
     for (let key = this.firstKey, end = this.lastKey, asc = this.firstKey <= end; asc ? key < end : key > end; asc ? key++ : key--) {
-      const octave = Math.floor((key - 12) / 12);
-      noteName = this.noteNames[key % 12] + octave;
-      this.allNoteNames.push(noteName);
-      this.keyForNoteName[noteName] = key;
-      this.noteForKey[key] = noteName;
+      const octave = Math.floor((key - 12) / 12)
+      noteName = this.noteNames[key % 12] + octave
+      this.allNoteNames.push(noteName)
+      this.keyForNoteName[noteName] = key
+      this.noteForKey[key] = noteName
     }
 
     this.majorScaleNotes = __range__(this.firstKey, this.lastKey, false).filter((key, index) => {
-      return [0, 2, 4, 5, 7, 9, 11].includes(((index + 4) % 12));
-    }); // C Major Scale. (I think?)
+      return [0, 2, 4, 5, 7, 9, 11].includes(((index + 4) % 12))
+    }) // C Major Scale. (I think?)
 
     for (const noteName of Array.from(this.allNoteNames)) {
       this.keys[this.keyForNoteName[noteName]] = noteName
@@ -33,23 +329,24 @@ export default class AuralCoding {
     }
   }
 
-  bufferForEvent(key, modifiers) {
-    let index;
+  bufferForEvent (key, modifiers) {
+    let index
     if (!key) {
-      return;
+      return
     }
 
     // if (/^[a-z]$/i.test(key)) {
-      const keyCode = key.toUpperCase().charCodeAt(0);
-      index = 24 + ((keyCode - 'A'.charCodeAt(0)) % 12);
-      if (/[A-Z]/.test(key)) {
-        index += 12;
-      }
-      return {
-        instrument: 'piano',
-        buffer: this.keys[this.majorScaleNotes[index]],
-        velocity: 1
-      };
+    const keyCode = key.toUpperCase().charCodeAt(0)
+    index = 24 + ((keyCode - 'A'.charCodeAt(0)) % 12)
+    if (/[A-Z]/.test(key)) {
+      index += 12
+    }
+    return {
+      instrument: 'piano',
+      // buffer: this.keys[this.majorScaleNotes[index]],
+      buffer: this.notes[this.trackIdx++ % this.notes.length],
+      velocity: 1
+    }
     // } else {
     //   let velocity;
     //   [index, velocity] = Array.from((() => {
@@ -94,28 +391,28 @@ export default class AuralCoding {
     // }
   }
 
-  async noteOn(event) {
+  async noteOn (event) {
     const {
       key,
       modifiers
-    } = this.keystrokeForKeyboardEvent(event);
+    } = this.keystrokeForKeyboardEvent(event)
     if (!key) {
-      return;
+      return
     }
     const {
       instrument,
       buffer,
       velocity
-    } = this.bufferForEvent(key, modifiers);
+    } = this.bufferForEvent(key, modifiers)
 
     if (!isFinite(velocity)) {
-      console.error(`${velocity} is not a finite number.`);
-      console.error(`key: ${key}`);
-      console.error(`modifiers: ${modifiers}`);
+      console.error(`${velocity} is not a finite number.`)
+      console.error(`key: ${key}`)
+      console.error(`modifiers: ${modifiers}`)
     }
-    
+
     if (!buffer) {
-      return;
+      return
     }
     // if ((this.sources[event.which] != null ? this.sources[event.which].playbackState : undefined) === 2) {
     //   return;
@@ -124,7 +421,7 @@ export default class AuralCoding {
     return await this.player.play(buffer, instrument)
   }
 
-  noteOff(event) {
+  noteOff (event) {
     // let source;
     // if (source = this.sources[event.which]) {
     //   this.sources[event.which] = null;
@@ -134,88 +431,88 @@ export default class AuralCoding {
     // }
   }
 
-  keystrokeForKeyboardEvent(event) {
-    let key;
+  keystrokeForKeyboardEvent (event) {
+    let key
     const {
       keyIdentifier
-    } = event;
+    } = event
     if (keyIdentifier.indexOf('U+') === 0) {
-      const hexCharCode = keyIdentifier.slice(2);
-      let charCode = parseInt(hexCharCode, 16);
+      const hexCharCode = keyIdentifier.slice(2)
+      let charCode = parseInt(hexCharCode, 16)
       if (!this.isAscii(charCode) && this.isAscii(event.which)) {
-        charCode = event.which;
+        charCode = event.which
       }
-      key = this.keyFromCharCode(charCode);
+      key = this.keyFromCharCode(charCode)
     } else {
-      key = keyIdentifier.toLowerCase();
+      key = keyIdentifier.toLowerCase()
     }
 
-    const modifiers = [];
+    const modifiers = []
     if (event.ctrlKey) {
-      modifiers.push('ctrl');
+      modifiers.push('ctrl')
     }
     if (event.altKey) {
-      modifiers.push('alt');
+      modifiers.push('alt')
     }
     if (event.shiftKey) {
       // Don't push 'shift' when modifying symbolic characters like '{'
       if (!/^[^A-Za-z]$/.test(key)) {
-        modifiers.push('shift');
+        modifiers.push('shift')
       }
       // Only upper case alphabetic characters like 'a'
       if (/^[a-z]$/.test(key)) {
-        key = key.toUpperCase();
+        key = key.toUpperCase()
       }
     } else {
       if (/^[A-Z]$/.test(key)) {
-        key = key.toLowerCase();
+        key = key.toLowerCase()
       }
     }
 
     if (event.metaKey) {
-      modifiers.push('cmd');
+      modifiers.push('cmd')
     }
 
     if (['meta', 'shift', 'control', 'alt'].includes(key)) {
-      key = null;
+      key = null
     }
 
     return {
       key,
       modifiers
-    };
-  }
-
-  keyFromCharCode(charCode) {
-    switch (charCode) {
-      case 8:
-        return 'backspace';
-      case 9:
-        return 'tab';
-      case 13:
-        return 'enter';
-      case 27:
-        return 'escape';
-      case 32:
-        return 'space';
-      case 127:
-        return 'delete';
-      default:
-        return String.fromCharCode(charCode);
     }
   }
 
-  isAscii(charCode) {
-    return 0 <= charCode && charCode <= 127;
+  keyFromCharCode (charCode) {
+    switch (charCode) {
+      case 8:
+        return 'backspace'
+      case 9:
+        return 'tab'
+      case 13:
+        return 'enter'
+      case 27:
+        return 'escape'
+      case 32:
+        return 'space'
+      case 127:
+        return 'delete'
+      default:
+        return String.fromCharCode(charCode)
+    }
+  }
+
+  isAscii (charCode) {
+    return charCode >= 0 && charCode <= 127
   }
 };
 
-function __range__(left, right, inclusive) {
-  let range = [];
-  let ascending = left < right;
-  let end = !inclusive ? right : ascending ? right + 1 : right - 1;
+function __range__ (left, right, inclusive) {
+  let range = []
+  let ascending = left < right
+  let end = !inclusive ? right : ascending ? right + 1 : right - 1
   for (let i = left; ascending ? i < end : i > end; ascending ? i++ : i--) {
-    range.push(i);
+    range.push(i)
   }
-  return range;
+  return range
 }
